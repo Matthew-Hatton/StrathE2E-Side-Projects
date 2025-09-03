@@ -3,6 +3,7 @@ rm(list = ls())
 library(dplyr)
 library(purrr)
 library(ggplot2)
+library(ggh4x)
 
 
 files <- list.files(
@@ -60,17 +61,24 @@ master <- all %>%
   filter(description %in% vars_of_interest) %>% 
   arrange(description,forcing,ssp)
 
-ggplot(master, aes(x = year, y = value, color = description)) +
-  geom_line() +
-  geom_point(size = 1) +
-  facet_grid(ssp ~ forcing) +
-  scale_y_continuous(name = "Value") +
-  scale_x_continuous(name = "Year", breaks = seq(min(master$year), max(master$year), by = 1)) +
-  theme_bw() +
-  theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
-    legend.position = "bottom"
-  )
+vars <- unique(master$description)
+
+for (v in vars) {
+  p <- master %>% 
+    filter(description == v) %>% 
+    ggplot(aes(x = year, y = value)) +
+    geom_line() +
+    geom_point(size = 1) +
+    ggh4x::facet_grid2(ssp ~ forcing, scales = "free_y", independent = "y") +
+    scale_x_continuous(limits = c(2010, 2019), breaks = 2010:2019) +
+    ggtitle(v) +
+    theme_bw() +
+    theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+    labs(y = "Model Annual Mean") +
+    NULL
+  
+  ggsave(filename = paste0("./Mission Atlantic/Saskia/Figures/", v, ".png"), plot = p, width = 8, height = 5)
+}
 
 write.csv(master,"./Mission Atlantic/Saskia/Objects/Results/Norweigen.csv",
           row.names = F)
