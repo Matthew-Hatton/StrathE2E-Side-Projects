@@ -14,8 +14,6 @@ files <- list.files(
 
 all_results <- lapply(files, readRDS)
 
-
-
 # helper to extract forcing/ssp/region from filenames
 get_meta <- function(key, filepath) {
   # key example: "CNRM.ssp126"
@@ -23,7 +21,7 @@ get_meta <- function(key, filepath) {
   list(
     forcing = parts[1],
     ssp     = parts[2],
-    region  = "Norweigen"   # still fixed, or extract from filename if needed
+    region  = "Norweigen"
   )
 }
 
