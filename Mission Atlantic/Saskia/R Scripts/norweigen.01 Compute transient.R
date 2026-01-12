@@ -5,7 +5,7 @@ library(lubridate)
 library(StrathE2E2)
 library(furrr)
 library(purrr)
-source("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/@_Region file.R")
+source("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/@_Region file.R")
 source("./StrathE2E_Upgrades/R Scripts/Functions/e2e_transient.R")
 
 # Define the scenarios you actually want
@@ -46,7 +46,7 @@ run_scenario <- function(forcing, ssp) {
   # Save results
   saveRDS(
     results,
-    paste0("./Mission Atlantic/Saskia/Objects/Results/RAW.Norweigen.", forcing, ".", ssp, ".rds")
+    paste0("./Mission Atlantic/Saskia/Objects/Results/Norway/RAW.Norweigen.", forcing, ".", ssp, ".rds")
   )
   
   return(paste("Finished:", forcing, ssp))
@@ -54,35 +54,35 @@ run_scenario <- function(forcing, ssp) {
 
 
 ## Read in all the StrathE2E Driving data
-My_scale <- readRDS("./StrathE2E_Upgrades/Objects/Mission Atlantic Transients/Domain_NS.rds")
+My_scale <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/Domain_NS.rds")
 
-My_boundary <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Boundary measurements.rds")
+My_boundary <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/Boundary measurements.rds")
 
-My_volumes <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/TS.rds") 
+My_volumes <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/TS.rds") 
 
-My_light <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/light.rds")
+My_light <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/light.rds")
 
-My_H_Flows <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/H-Flows.rds")
+My_H_Flows <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/H-Flows.rds")
 
-My_V_Flows <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/SO_DO exchanges.rds")
+My_V_Flows <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/SO_DO exchanges.rds")
 
-My_V_Diff <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/vertical diffusivity.rds")
+My_V_Diff <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/vertical diffusivity.rds")
 
-My_Waves <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Significant wave height.rds")
+My_Waves <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/Significant wave height.rds")
 
-My_atmosphere <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Atmospheric N deposition.rds")
+My_atmosphere <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/Atmospheric N deposition.rds")
 
-My_SPM <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Suspended particulate matter.rds")
+My_SPM <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/Suspended particulate matter.rds")
 
-My_Rivers <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/NE River input.rds")
+My_Rivers <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/NE River input.rds")
 
-My_DIN_fix <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Ammonia to DIN.rds")
+My_DIN_fix <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/Ammonia to DIN.rds")
 
-My_overhang <-  readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/overhang exchanges.rds")
+My_overhang <-  readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/overhang exchanges.rds")
 
-My_overhang_diffusivity <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/overhang diffusivity.rds")
+My_overhang_diffusivity <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/overhang diffusivity.rds")
 
-My_overhang_exchanges <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/overhang exchanges.rds")
+My_overhang_exchanges <- readRDS("./Mission Atlantic/Saskia/Objects/Mission Atlantic Transients/Norway/overhang exchanges.rds")
 
 # Run all 4 scenarios in parallel
 future_pmap(scenarios, run_scenario)

@@ -6,7 +6,7 @@ library(ggplot2)
 library(ggh4x)
 
 files <- list.files(
-  "./Mission Atlantic/Saskia/Objects/Results/Norway/",
+  "./Mission Atlantic/Saskia/Objects/Results/Senegal",
   pattern = "\\.rds$",      # only RDS files
   full.names = TRUE
 )
@@ -20,7 +20,7 @@ get_meta <- function(key, filepath) {
   list(
     forcing = parts[1],
     ssp     = parts[2],
-    region  = "Norweigen"
+    region  = "Senegal"
   )
 }
 
@@ -50,11 +50,11 @@ all <- map2_dfr(all_results, files, function(scenario_data, filepath) {
 
 ## What variables do we want?
 vars_of_interest <- c("Planktivorous_fish","Planktivorous_fish_larvae",
-                     "Demersal_fish","Demersal_fish_larvae",
-                     "Omnivorous_zooplankton","Carnivorous_zooplankton",
-                     "Surface_layer_phytoplankton","Deep_layer_phytoplankton",
-                     "Benthos_susp/dep_feeders","Benthos_carn/scav_feeders",
-                     "Birds","Pinnipeds","Cetaceans")
+                      "Demersal_fish","Demersal_fish_larvae",
+                      "Omnivorous_zooplankton","Carnivorous_zooplankton",
+                      "Surface_layer_phytoplankton","Deep_layer_phytoplankton",
+                      "Benthos_susp/dep_feeders","Benthos_carn/scav_feeders",
+                      "Birds","Pinnipeds","Cetaceans")
 
 master <- all %>% 
   filter(description %in% vars_of_interest) %>% 
@@ -79,5 +79,5 @@ for (v in vars) {
   # ggsave(filename = paste0("./Mission Atlantic/Saskia/Figures/", v, ".png"), plot = p, width = 8, height = 5)
 }
 
-write.csv(master,"./Mission Atlantic/Saskia/Objects/Results/Norweigen.csv",
+write.csv(master,"./Mission Atlantic/Saskia/Objects/Results/Senegal.csv",
           row.names = F)
